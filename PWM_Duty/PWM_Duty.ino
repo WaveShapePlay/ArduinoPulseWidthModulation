@@ -9,7 +9,6 @@ void setup() {
 int getDuty(){
     String userInput_duty;
     int dutyCycle;
-    
     userInput_duty = Serial.readString();
     dutyCycle = userInput_duty.toInt();
     return dutyCycle;
