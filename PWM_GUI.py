@@ -18,8 +18,8 @@ scaleBarFrame = Frame(root)
 scaleBarFrame.pack(pady = padFrames)
 entryFrame = Frame(root)
 entryFrame.pack(pady = padFrames)
-CurrntValFrame = Frame(root)
-CurrntValFrame.pack(pady = padFrames)
+currntValFrame = Frame(root)
+currntValFrame.pack(pady = padFrames)
 
 
 
