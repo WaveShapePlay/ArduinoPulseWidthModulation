@@ -1,6 +1,9 @@
 int LED_Pin_3 = 3;
 char userInput;
 int dutyCycleVal;
+int pwm_val = 0;
+int pwmMaxValue = 255;
+
 void setup() {
   pinMode(LED_Pin_3, OUTPUT);
   Serial.begin(9600);
@@ -28,6 +31,17 @@ void loop() {
           } // Enter Duty Cycle
         }
       } // if 'd'
+    if(userInput == 'l'){
+      for(int i = 0; i< 256; i ++){
+        analogWrite(LED_Pin_3,i);
+        delay(10);
+      }
+      for(int y = 0; y < 256; y++){
+        pwm_val = pwmMaxValue - y;
+        analogWrite(LED_Pin_3, pwm_val);
+        delay(10);
+      }
+    } // if 'l'
     } // First If available
   } // Main Loop 
 
