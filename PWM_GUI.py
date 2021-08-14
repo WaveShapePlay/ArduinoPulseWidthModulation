@@ -21,8 +21,6 @@ entryFrame.pack(pady = padFrames)
 currntValFrame = Frame(root)
 currntValFrame.pack(pady = padFrames)
 
-
-
 defaultDuty = '0'
 userDutyScale = StringVar()
 userDutyScale.set(defaultDuty)
@@ -59,6 +57,9 @@ class PWM_mode():
         ser.write(value.encode())
         curretUserValue.set(value)
 
+    def fade_mode(self):
+        ser.write(b'l')
+
 pwm = PWM_mode()
 
 padyButtons = 10
@@ -73,6 +74,9 @@ btn_SliderEntry.grid(row=0, column=2, pady= padyButtons)
 
 btn_EntryBox = tk.Button(buttonFrame, text="Get Entry", command=pwm.entry_box_pwm)
 btn_EntryBox.grid(row=0, column=3, pady= padyButtons)
+
+btn_Fade_Mode = tk.Button(buttonFrame, text="Fade", command=pwm.fade_mode)
+btn_Fade_Mode.grid(row=0, column=4, pady= padyButtons)
 
 scaleBar_pwm = tk.Scale(scaleBarFrame,from_=0,to = 255,orient=HORIZONTAL, variable = userDutyScale)
 scaleBar_pwm.grid(row=0, column = 0)
