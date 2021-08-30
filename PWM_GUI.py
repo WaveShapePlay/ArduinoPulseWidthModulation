@@ -58,7 +58,8 @@ class PWM_mode():
         curretUserValue.set(value)
 
     def fade_mode(self):
-        ser.write(b'l')
+        ser.write(b'f')
+        curretUserValue.set("Fade Mode")
 
 pwm = PWM_mode()
 
@@ -95,5 +96,5 @@ currentVal_textLable.grid(row=0, column=0)
 currentVal_Lable.grid(row=0, column=1)
 curretUserValue.set(defaultDuty)
 
-root.geometry("250x250")
+root.geometry("350x250")
 root.mainloop()
