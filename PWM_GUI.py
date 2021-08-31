@@ -1,3 +1,11 @@
+'''This PWM_GUI code uses tkinter and pyserial to control the Pulse Width Modulation (PWM)
+output on the Arduino Uno (or equivalent) microcontroller. The user will interface
+via buttons, an entry box, and/or a slider. The matching Arduino code PWM_Duty.ino waits
+for the PWM mode commands and acts accordingly. These commands initiated by a single character.
+Pyserial is the module that is used for the serial transfer.Connect the Arduino uno to your
+computer using a USB cable type A/B Standard USB 2.0 cable.
+'''
+
 import serial
 from tkinter import *
 import tkinter as tk
@@ -7,7 +15,7 @@ import time
 commPort = 'COM4'
 ser = serial.Serial(commPort, baudrate = 9600, timeout = 1)
 
-# creating tkinter window 
+# creating tkinter window and basic formatting 
 root = Tk() 
 root.title('PWM GUI')
 
@@ -26,33 +34,52 @@ userDutyScale = StringVar()
 userDutyScale.set(defaultDuty)
 curretUserValue = StringVar()
 
+'''
+Class PWM_mode
 
+Class contains the methods used for controlling the PWM using the arduino.
+The arduino waits for char inputs. Some modes require two inputs,
+the 'd' char first, signaling to the arduino that the data selected by
+the user, followed by the data selected by the user. The values selected
+is displayed within the GUI using a tkinter StingVar, which is updated
+depending on the user selection.
+
+Modes:
+
+Input mode - send char 'd' and follow up with user specified values for:
+    Turn On / Off (Fixed values 255/0 respectively)
+    Entry Box
+    Slider
+    
+Fade mode - send char 'f'.
+
+'''
 class PWM_mode():
     
-    def inputMode(self):
+    def input_mode(self):
         ser.write(b'd')
         time.sleep(1)
         
     def turnOn_pwm(self):
-        self.inputMode()
+        self.input_mode()
         value = '255'
         ser.write(value.encode())
         curretUserValue.set(value)
 
     def turnOff_pwm(self):
-        self.inputMode()
+        self.input_mode()
         value = '0'
         ser.write(value.encode())
         curretUserValue.set(value)
 
     def slider_entry_pwm(self):
-        self.inputMode()
+        self.input_mode()
         value = userDutyScale.get()
         ser.write(value.encode())
         curretUserValue.set(value)
 
     def entry_box_pwm(self):
-        self.inputMode()
+        self.input_mode()
         value = entry_pwm.get()
         ser.write(value.encode())
         curretUserValue.set(value)
@@ -63,6 +90,7 @@ class PWM_mode():
 
 pwm = PWM_mode()
 
+# Tk GUI widget creation 
 padyButtons = 10
 btn_On = tk.Button(buttonFrame, text="Turn On", command=pwm.turnOn_pwm)
 btn_On.grid(row=0, column=0, pady= padyButtons)
