@@ -1,8 +1,8 @@
 '''This PWM_GUI code uses tkinter and pyserial to control the Pulse Width Modulation (PWM)
 output on the Arduino Uno (or equivalent) microcontroller. The user will interface
 via buttons, an entry box, and/or a slider. The matching Arduino code PWM_Duty.ino waits
-for the PWM mode commands and acts accordingly. These commands initiated by a single character.
-Pyserial is the module that is used for the serial transfer.Connect the Arduino uno to your
+for the PWM mode commands and acts accordingly. These commands are initiated by a single character.
+Pyserial is the module that is used for the serial transfer. Connect the Arduino uno to your
 computer using a USB cable type A/B Standard USB 2.0 cable.
 '''
 
@@ -39,8 +39,8 @@ Class PWM_mode
 
 Class contains the methods used for controlling the PWM using the arduino.
 The arduino waits for char inputs. Some modes require two inputs,
-the 'd' char first, signaling to the arduino that the data selected by
-the user, followed by the data selected by the user. The values selected
+the 'd' char first, signaling to the arduino that the data is selected by
+the user is coming, followed by the data selected by the user. The value selected
 is displayed within the GUI using a tkinter StingVar, which is updated
 depending on the user selection.
 
