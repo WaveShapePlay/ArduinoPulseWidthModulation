@@ -1,3 +1,8 @@
+/* This Arduino code is design to interface with the Python Tkinter PWM_GUI.py user interface.
+ * It uses Pluse Width Modulation to control the intensity of an LED. This code waits for
+ * the mode/value to be sent (via pyserial) and then updates the PWM output value.
+ */
+ 
 int LED_Pin_3 = 3;
 char userInput;
 int dutyCycleVal;
@@ -21,20 +26,29 @@ int getDuty(){
     return dutyCycle;
 }
 
-/* loop() - Checks/monitors for user data via Serial.available()
- *  If data is transfered using pyserial, then the values will
- *  be checked. The values contain the mode (followed by user value if applicable). 
- *  The modes are:
- *    'd' = data mode waits for the user to input the desired pwm value
- *    'f' = fade mode runs a incrementing/decrimenting pwm loop once
- */
+/*  loop() 
+ *  
+ *  Function checks/monitors user data via Serial.available(). If data is transfered 
+ *  using pyserial, then the mode will be checked. First the mode is sent, followed 
+ *  by user value if applicable. 
+ *  
+ *  Modes:
+ *    'd' = Data mode waits for the user to input the desired pwm value. After
+ *          'd' is recived 'user_value_flag' is set to zero, which is the conditional
+ *          for the while loop. Once the user updates the value, we output the
+ *          value to the Arduino PWM pin and exit the while loop.
+ *     
+ *    'f' = Fade mode runs a incrementing loop followed by a decrimenting loop.
+ *    The index of each loop is the PWM output value. The net effect is a gradual
+ *    fade of an LED. The delay() value controls the duration of the fade, after  
+ *    each updated PWM value.
+ */ 
 void loop() {
 
   if(Serial.available()>0){
     userInput = Serial.read();
     Serial.println(userInput);
     if(userInput == 'd'){
-      Serial.println("Enter Duty Cycle");
       user_value_flag = 0;
         while(user_value_flag == 0){
           if(Serial.available()>0){
