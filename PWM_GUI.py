@@ -4,6 +4,9 @@ via buttons, an entry box, and/or a slider. The matching Arduino code PWM_Duty.i
 for the PWM mode commands and acts accordingly. These commands are initiated by a single character.
 Pyserial is the module that is used for the serial transfer. Connect the Arduino uno to your
 computer using a USB cable type A/B Standard USB 2.0 cable.
+
+The Arduino flie is located here:
+https://github.com/WaveShapePlay/ArduinoPulseWidthModulation/blob/master/PWM_Duty/PWM_Duty.ino
 '''
 
 import serial

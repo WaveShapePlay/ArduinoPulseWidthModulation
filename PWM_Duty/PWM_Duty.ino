@@ -1,6 +1,8 @@
 /* This Arduino code is design to interface with the Python Tkinter PWM_GUI.py user interface.
  * It uses Pluse Width Modulation to control the intensity of an LED. This code waits for
  * the mode/value to be sent (via pyserial) and then updates the PWM output value.
+ * 
+ * Python code: https://github.com/WaveShapePlay/ArduinoPulseWidthModulation/blob/master/PWM_GUI.py
  */
  
 int LED_Pin_3 = 3;
