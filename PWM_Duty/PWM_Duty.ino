@@ -5,7 +5,7 @@ int pwm_val = 0;
 int pwmMaxValue = 255;
 int user_value_flag = 0;
 
-// Setup() - Initilization of PWM output pin and Serial connection //
+// Setup() - Initilization of PWM output pin and Serial connection
 void setup() {
   pinMode(LED_Pin_3, OUTPUT);
   Serial.begin(9600);
@@ -22,10 +22,11 @@ int getDuty(){
 }
 
 /* loop() - Checks/monitors for user data via Serial.available()
- *  if data is transfered using pyserial, then the values will
- *  be checked. The modes are:
- *  'd' = data mode waits for the user to input the desired pwm value
- *  'f' = fade mode runs a incrementing/decrimenting pwm loop once
+ *  If data is transfered using pyserial, then the values will
+ *  be checked. The values contain the mode (followed by user value if applicable). 
+ *  The modes are:
+ *    'd' = data mode waits for the user to input the desired pwm value
+ *    'f' = fade mode runs a incrementing/decrimenting pwm loop once
  */
 void loop() {
 
